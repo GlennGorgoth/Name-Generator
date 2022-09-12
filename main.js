@@ -5,6 +5,10 @@ const nameCsvFiles = [
     "/files/lastNames.csv"
 ]
 
+function getRandomInt(max){
+    return Math.floor(Math.random() * max);
+}
+
 function dynamicallyLoadCSV(url) {
     var link = document.createElement("link");
     link.href = url;
@@ -14,62 +18,74 @@ function dynamicallyLoadCSV(url) {
     document.head.appendChild(script);  // add it to the end of the head section of the page (could change 'head' to 'body' to add it to the end of the body section instead)
 }
 
-$(document).ready(function() {
-    $.ajax({
-      type: "GET",
-      url: "files/lastNames.csv",
-      dataType: "text",
-      success: function(data) {
-        console.log(data)
-        processData(data); //define your own function
-      }
-    });
-  });
+var nameLists = new Array();
 
-// const nameLists = importNameLists();
+function importNameLists() {
+    var nameFile
+    console.log("importing name lists")
+    for (a = 0; a < 3; a++){
+        console.log("indx = " + a);
+        nameFile = nameCsvFiles[a];
+        console.log('retrieving ' + nameFile)
+        $.ajax({
+            type: "GET",
+            url: nameFile,
+            dataType: "text",
+            success: function(data) {
+              console.log(data)
+            //   nameLists.push(data)
+              const names = $.csv.toArrays(data); //define your own function
+              nameLists.push(names)
+              checkIfFinished();
+            }
+          });
+       
+    }
+}
 
-// function importNameLists() {
-//     console.log("importing name lists")
-//     let nameLists = [];
-//     for (a = 0; a < 3; a++){
-//         console.log("indx = " + a);
-//         var nameFile = nameCsvFiles[a];
-//         $.ajax({
-//             type: "GET",
-//             url: nameFile,
-//             dataType: "text",
-//             success: function(data) {
-//               console.log('retrieving ' + nameFile)
-//               const names = convertCSV(data); //define your own function
-//             }
-//           });
-//     }
-//     return text;
-    // nameLists = []
-    // for file in csvfiles:
-    //     namelyst = []
-    //     with open(relativePathNames+file, 'r') as csvfile:
-    //         names = csv.reader(csvfile)
-    //         for name in names:
-    //             namelyst.append(name[0])
-    //     nameLists.append(namelyst)
-    // return nameLists
+function checkIfFinished(){
+    if (nameLists.length == 3) {
+        for (i=0; i<3; i++){
+            console.log("added " + nameLists[i][0])
+        }
+    }
+}
+
+// function convertCSV(data){
+//     const nameList = []
+//     const reader = new FileReader();
+//     reader.onload = function (e) {
+//         let str = e.target.result;
+//         nameList = csvStringToArray(str);
+//         // document.write(text);
+//         // console.log(text); // the CSV content as string
+//     };
+//     reader.readAsText(data);
+//     return nameList
 // }
 
 function convertCSV(data){
-    const nameList = []
-    const reader = new FileReader();
-    reader.onload = function (e) {
-        let text = e.target.result;
-        // document.write(text);
-        console.log(text); // the CSV content as string
-    };
-    reader.readAsText(data);
-    return nameList
+
+}
+function csvStringToArray(str, delimiter = "\n"){
+    const names = str.split(delimiter);
+    return names
 }
 
 
 function generateNames(index) {
+    var names = new Array();
+    var firstNameLength = nameLists[index].length - 1
+    var lastNameLength = nameLists[2].length -1
+    for (i=0;i<5;i++){
+        var firstName = nameLists[index][getRandomInt(firstNameLength)]
+        var lastName = nameLists[2][getRandomInt(lastNameLength)]
+        var newName = firstName + " " + lastName;
+        names.push(newName)
+    console.log(names)
+    }
+
+
 // names = []
 // femaleNameLength = len(nameLists[0])-1
 // maleNameLength = len(nameLists[1])-1
@@ -98,3 +114,13 @@ function getFemaleName(){
     names = generateNames(0)
     return names
 }
+
+function getSurpriseName(){
+    names = generateNames(getRandomInt(2))
+    return names
+}
+
+$(document).ready(function() {
+    importNameLists();
+  });
+  
