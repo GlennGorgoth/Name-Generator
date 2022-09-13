@@ -1,8 +1,8 @@
 
 const nameCsvFiles = [
-    "/files/femaleFirstNames.csv",
-    "/files/maleFirstNames.csv",
-    "/files/lastNames.csv"
+    "./files/femaleFirstNames.csv",
+    "./files/maleFirstNames.csv",
+    "./files/lastNames.csv"
 ]
 
 function getRandomInt(max){
@@ -70,7 +70,7 @@ function generateNames(index) {
         var picture = document.createElement("img");
         var picName = pictureStart + getRandomInt(999)+1;
         console.log(picName);
-        picture.src = "/images/"+picName.toString()+".jpg";
+        picture.src = "./images/"+picName.toString()+".jpg";
         pictureCell.appendChild(picture);
         // Generate 5 character names
         row = document.createElement("tr");

@@ -80,6 +80,19 @@ button {
     cursor: pointer;
 }
 
+.menuButton {
+    background-color: #0082a6;
+    /* color:#0082a6; */
+    color: #a8ce6f;
+    border-radius: 2px;
+    cursor: pointer;
+    width: fit-content;
+    padding: 4px 10px;
+    margin-left: 20px;
+    margin-top: 5px;
+    text-transform: uppercase;
+}
+
 .loginButton {
     text-transform: uppercase;
     color: #ccc;
