@@ -6,8 +6,12 @@ body {
 
 h1 {
     text-transform: uppercase;
-    padding-left: 20px;
-    padding-right: 20px;
+    /* padding-left: 2px;
+    padding-right: 2px; */
+    padding: 5px;
+}
+h2 {
+    font-size:medium;
 }
 
 h3 {
@@ -56,10 +60,11 @@ table {
 
 .menuTitle{
     background-color: #0082a6;
+    border-radius: 6px;
     color:#fff568;
     font-size: 100%;
-    max-width:fit-content;
-    padding: 5px;
+    max-width:max-content;
+    padding: 0px 10px;
     margin: auto;
     text-align: center;
 }
@@ -76,9 +81,11 @@ button {
 }
 
 .loginButton {
+    text-transform: uppercase;
+    color: #ccc;
     font-size: large;
-    padding: 14px 20px;
-    margin: 30px 20px;
+    padding: 10px 15px;
+    margin: 15px 20px;
     border: none;
     width:fit-content;
 }
@@ -98,33 +105,42 @@ button:hover {
 /* Layout for Name Results Table */
 
 #nameText{
-    background-color: #0082a6;
+    background-color: #002651;
     color:#fff568;
-    font-size: 400%;
-    width: auto;
-    padding: 10px;
-    margin: auto;
+    /* font-size: 200%; */
+    width: fit-content;
+    /* padding: 10px; */
+    padding-top: 2px;
+    margin: 20px auto;
     text-align: center;
-}
-
-#nameTable {
-    width: 90%;
-    /* left: 5%; */
-    left: 48px;
-    text-align: center;
+    align-items: center; 
 }
 
 .nameCells {
-    position: absolute;
+    /* position: absolute; */
     /* border: 2px solid #6c93ff; */
-    background-color: #0082a6;
+    /* background-color: #0082a6; */
     text-align: center;
-    margin: 5px;
-    padding: 5px;
-    font-size: xx-large;
+    margin: 15px;
+    padding: 5px 25px;
+    font-size:large;
     font-weight: bold;
     
 }
+.pictures{
+    margin:auto;
+    align-items: center;
+}
+
+td img {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    max-width: 60%;
+    height: auto;
+    padding: 2px
+}
+
 
 /* Colors */
 
@@ -225,55 +241,5 @@ button:hover {
 .color8 {
     filter: brightness(0.5) sepia(1) hue-rotate(320deg) saturate(500%) ;
 }
-
-.tile1 {
-    color: rgb(242, 208, 79);
-}
-.tile2 {
-    color: rgb(33, 214, 205);
-}
-.tile3 {
-    color: rgb(246, 142, 86);
-}
-.tile4 {
-    color: rgb(0, 191, 243);
-}
-.tile5 {
-    color: rgb(251, 255, 93);
-}
-.tile6 {
-    color: rgb(131, 197, 255);
-}
-.tile7 {
-    color: rgb(255, 245, 104);
-}
-.tile8 {
-    color: rgb(167, 189, 237);
-}
-.tile9 {
-    color: rgb(172, 211, 115);
-}
-.tile10 {
-    color: rgb(175, 170, 255);
-}
-.tile11 {
-    color: rgb(124, 197, 118);
-}
-.tile12 {
-    color: rgb(198, 142, 250);
-}
-.tile13 {
-    color: rgb(232, 235, 86);
-}
-.tile14 {
-    color: rgb(253, 151, 253);
-}
-.tile15 {
-    color: rgb(255, 247, 132);
-}
-.tile16 {
-    color: rgb(196, 214, 253);
-}
-
 
 

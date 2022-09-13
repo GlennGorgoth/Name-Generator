@@ -12,7 +12,6 @@ function getRandomInt(max){
 function dynamicallyLoadCSV(url) {
     var link = document.createElement("link");
     link.href = url;
-
     var script = document.createElement("script");  // create a script DOM node
     script.src = url;  // set its src to the provided URL
     document.head.appendChild(script);  // add it to the end of the head section of the page (could change 'head' to 'body' to add it to the end of the body section instead)
@@ -24,15 +23,15 @@ function importNameLists() {
     var nameFile
     console.log("importing name lists")
     for (a = 0; a < 3; a++){
-        console.log("indx = " + a);
+        // console.log("indx = " + a);
         nameFile = nameCsvFiles[a];
-        console.log('retrieving ' + nameFile)
+        // console.log('retrieving ' + nameFile)
         $.ajax({
             type: "GET",
             url: nameFile,
             dataType: "text",
             success: function(data) {
-              console.log(data)
+            //   console.log(data)
             //   nameLists.push(data)
               const names = $.csv.toArrays(data); //define your own function
               nameLists.push(names)
@@ -51,58 +50,43 @@ function checkIfFinished(){
     }
 }
 
-// function convertCSV(data){
-//     const nameList = []
-//     const reader = new FileReader();
-//     reader.onload = function (e) {
-//         let str = e.target.result;
-//         nameList = csvStringToArray(str);
-//         // document.write(text);
-//         // console.log(text); // the CSV content as string
-//     };
-//     reader.readAsText(data);
-//     return nameList
-// }
-
-function convertCSV(data){
-
-}
-function csvStringToArray(str, delimiter = "\n"){
-    const names = str.split(delimiter);
-    return names
-}
-
-
 function generateNames(index) {
+    document.getElementById("nameText").innerHTML = "";
+    nameTable = document.getElementById("nameText");
+    nameTable.hidden = false;
     var names = new Array();
+    var pictureStart = 1;
     var firstNameLength = nameLists[index].length - 1
     var lastNameLength = nameLists[2].length -1
     for (i=0;i<5;i++){
+        // Generate 5 pictures of characters
+        if (index==0){
+            pictureStart = 1
+        } else {
+            pictureStart = 3000
+        }
+        var pictureCell = document.getElementById("picture_"+i.toString());
+        pictureCell.innerHTML = "";
+        var picture = document.createElement("img");
+        var picName = pictureStart + getRandomInt(999)+1;
+        console.log(picName);
+        picture.src = "/images/"+picName.toString()+".jpg";
+        pictureCell.appendChild(picture);
+        // Generate 5 character names
+        row = document.createElement("tr");
+        cell = document.createElement("td");
+        cell.classList.add("nameCells");
         var firstName = nameLists[index][getRandomInt(firstNameLength)]
         var lastName = nameLists[2][getRandomInt(lastNameLength)]
         var newName = firstName + " " + lastName;
         names.push(newName)
-    console.log(names)
+        var text = document.createTextNode(newName);
+        cell.appendChild(text);
+        row.appendChild(cell);
+        nameTable.appendChild(row);
+        
+    // console.log(names)
     }
-
-
-// names = []
-// femaleNameLength = len(nameLists[0])-1
-// maleNameLength = len(nameLists[1])-1
-// lastNameLength = len(nameLists[2])-1    
-// if indx == 0:
-//     listlen = femaleNameLength
-// else:
-//     listlen = maleNameLength
-// for i in range (5):
-    // firstName = nameLists[indx][random.randint(1, listlen)] 
-    // lastName = nameLists[2][random.randint(1, lastNameLength)]
-    // newName = firstName + ' ' + lastName
-    // if len(newName)>29:
-    //     newName = getNewName(indx, nameLists)
-    // names.append(newName)
-// return names
-
 }
 
 function getMaleName(){

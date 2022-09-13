@@ -16,14 +16,24 @@
             <div class="menuDiv">
                 <div class="topSpace">Top Space</div>
                 <div class="menuTitle"><h1>CLASSY NAME GENERATOR</h1> </div>
-                <div class="midSpace">mid space</div>
+                <!-- <div class="midSpace">mid space</div> -->
                 <div class="container">
-                    <h2 class="text-green"><b>Click to generate a classy name</b></h2>
-                    <button type="button" class="loginButton" onclick="getMaleName()">Male Name</button>
-                    <button type="button" class="loginButton" onclick="getFemaleName()">Female Name</button>
+                    <h2 class="text-green"><b>Click to generate some classy names</b></h2>
+                    <button type="button" class="loginButton" onclick="getMaleName()">Male Names</button>
+                    <button type="button" class="loginButton" onclick="getFemaleName()">Female Names</button>
                     <button type="button" class="loginButton" onclick="getSurpriseName()">Surprise Me</button>
                 </div>
-                <div class="nameResults"></div>
+                <div class="nameResults" >
+
+                    <table class="nameTable" id="nameText" hidden="true"></table>
+                    <table class="pictures">
+                        <td class ="picture_cells" id="picture_0"></td>
+                        <td class ="picture_cells" id="picture_1"></td>
+                        <td class ="picture_cells" id="picture_2"></td>
+                        <td class ="picture_cells" id="picture_3"></td>
+                        <td class ="picture_cells" id="picture_4"></td>
+                    </table>
+                </div>
             </div>
         </div>
 
