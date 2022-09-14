@@ -9,14 +9,6 @@ function getRandomInt(max){
     return Math.floor(Math.random() * max);
 }
 
-function dynamicallyLoadCSV(url) {
-    var link = document.createElement("link");
-    link.href = url;
-    var script = document.createElement("script");  // create a script DOM node
-    script.src = url;  // set its src to the provided URL
-    document.head.appendChild(script);  // add it to the end of the head section of the page (could change 'head' to 'body' to add it to the end of the body section instead)
-}
-
 var nameLists = new Array();
 
 function importNameLists() {
@@ -59,19 +51,7 @@ function generateNames(index) {
     var firstNameLength = nameLists[index].length - 1
     var lastNameLength = nameLists[2].length -1
     for (i=0;i<5;i++){
-        // Generate 5 pictures of characters
-        if (index==0){
-            pictureStart = 1
-        } else {
-            pictureStart = 3000
-        }
-        var pictureCell = document.getElementById("picture_"+i.toString());
-        pictureCell.innerHTML = "";
-        var picture = document.createElement("img");
-        var picName = pictureStart + getRandomInt(999)+1;
-        console.log(picName);
-        picture.src = "./images/"+picName.toString()+".jpg";
-        pictureCell.appendChild(picture);
+
         // Generate 5 character names
         row = document.createElement("tr");
         cell = document.createElement("td");
@@ -84,9 +64,42 @@ function generateNames(index) {
         cell.appendChild(text);
         row.appendChild(cell);
         nameTable.appendChild(row);
+
+        // Generate 5 pictures of characters
+        if (index==0){
+            pictureStart = 1
+        } else {
+            pictureStart = 3000
+        }
+        var pictureCell = document.getElementById("picture_"+i.toString());
+        pictureCell.innerHTML = "";
+        var picture = document.createElement("img");
+        picture.setAttribute("id","img_"+i.toString());
+        var picName = pictureStart + getRandomInt(999)+1;
+        console.log(picName);
+        var picLink = "./images/"+picName.toString()+".jpg";
+        picture.src = picLink;
+        pictureCell.appendChild(picture);
         
-    // console.log(names)
     }
+}
+
+function enlargeImg(imgnum){
+    var overlay = document.getElementById("overlay");
+    var overImgDiv = document.getElementById("overImgDiv");
+    overImgDiv.innerHTML="";
+    var clickedPic = document.getElementById("img_"+imgnum.toString());
+    var overImage = document.createElement("img");
+    overImage.src = clickedPic.src;
+    overImage.onclick =function(){hideOverlay()};
+    overImage.setAttribute('id','overImage');
+    overImgDiv.appendChild(overImage);
+    overlay.style.visibility = "visible";
+}
+
+function hideOverlay(){
+    var overlay = document.getElementById("overlay");
+    overlay.style.visibility = "hidden";
 }
 
 function getMaleName(){

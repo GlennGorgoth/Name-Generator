@@ -31,14 +31,18 @@
 
                     <table class="nameTable" id="nameText" hidden="true"></table>
                     <table class="pictures">
-                        <td class ="picture_cells" id="picture_0"></td>
-                        <td class ="picture_cells" id="picture_1"></td>
-                        <td class ="picture_cells" id="picture_2"></td>
-                        <td class ="picture_cells" id="picture_3"></td>
-                        <td class ="picture_cells" id="picture_4"></td>
+                        <td class ="picture_cells" id="picture_0" onclick="enlargeImg(0)"></td>
+                        <td class ="picture_cells" id="picture_1" onclick="enlargeImg(1)" ></td>
+                        <td class ="picture_cells" id="picture_2" onclick="enlargeImg(2)"></td>
+                        <td class ="picture_cells" id="picture_3" onclick="enlargeImg(3)"></td>
+                        <td class ="picture_cells" id="picture_4" onclick="enlargeImg(4)" ></td>
                     </table>
                 </div>
             </div>
+        </div>
+        <div class="overlay" id="overlay" visibility="hidden">
+            <div id="overBackground"></div>
+            <div id="overImgDiv"></div>
         </div>
 
     </body>
