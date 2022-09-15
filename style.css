@@ -11,7 +11,7 @@ h1 {
     padding: 5px;
 }
 h2 {
-    font-size:medium;
+    font-size:large;
 }
 
 h3 {
@@ -32,30 +32,13 @@ table {
 
 
 
+
 /* Page Layout */
 
 .menuDiv {
     position: absolute;
     width: 100%;
-    z-index: 80;
-}
-
-.topSpace{
-    top:30px;
-    height: 10%;
-    width: 100%;
-    padding: 10px;
-    text-align: center;
-    visibility: hidden;
-}
-
-.midSpace{
-    top:45px;
-    height: 10px;
-    width: 100%;
-    padding: 5px;
-    text-align: center;
-    visibility: hidden;
+    z-index: 10;
 }
 
 .menuTitle{
@@ -67,6 +50,16 @@ table {
     padding: 0px 10px;
     margin: auto;
     text-align: center;
+}
+
+.pictures{
+    max-width: 90%;
+}
+
+.footer{
+    position: relative;
+    text-align: center;
+    margin-top: 20px;
 }
 
 .overlay{
@@ -81,28 +74,45 @@ table {
 
 #overBackground{
     position: fixed;
-    display: inline-block;
+    display: block;
     background-color: #001e40;
-    opacity: .8;
-    width: 100%;
+    border-radius: 10px;
+    opacity: .85;
+    width: 98%;
     height: 100%;
     visibility: inherit;
+}
+
+#overImgDiv{
+    text-align: center;
 }
 
 #overImage{
     position: relative;
     display:block;
-    width: auto;
-    margin: 10% auto;
-    align-self: center;
+    width: 70%;
+    max-width: 300px;
+    margin: auto;
+    margin-top: 20px;
 }
 
-.allMenu{
-    z-index: 1;
+.imgName{
+    position: relative;
+    display: block;
+    font-size: x-large;
+    color: #a8ce6f;
+    margin-top: 10px;
 }
 
 /* Layout for Buttons */
 
+.container {
+    width: auto;
+    /* padding: 5px; */
+    margin: auto;
+    text-align: center;
+    align-items: center;
+}
 
 button {
     background-color: #0082a6;
@@ -113,15 +123,12 @@ button {
 }
 
 .menuButton {
-    background-color: #0082a6;
-    /* color:#0082a6; */
+    background-color: #002044;
     color: #a8ce6f;
-    border-radius: 2px;
+    border-radius: 4px;
     cursor: pointer;
-    width: fit-content;
     padding: 4px 10px;
-    margin-left: 20px;
-    margin-top: 5px;
+    margin-left: auto;
     text-transform: uppercase;
 }
 
@@ -139,13 +146,7 @@ button:hover {
     opacity: 0.8;
 }
 
-.container {
-    width: auto;
-    padding: 5px;
-    margin: auto;
-    text-align: center;
-    align-items: center;
-}
+
 
 /* Layout for Name Results Table */
 
@@ -181,11 +182,9 @@ td img {
     display: block;
     margin-left: auto;
     margin-right: auto;
-    max-width: 60%;
+    max-width: 95%;
     height: auto;
-    padding: 2px
 }
-
 
 /* Colors */
 

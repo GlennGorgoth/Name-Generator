@@ -42,43 +42,50 @@ function checkIfFinished(){
     }
 }
 
-function generateNames(index) {
+function generateNames(index, surprise=false) {
     document.getElementById("nameText").innerHTML = "";
     nameTable = document.getElementById("nameText");
     nameTable.hidden = false;
     var names = new Array();
     var pictureStart = 1;
-    var firstNameLength = nameLists[index].length - 1
+    var maxPicNum = 1799;
     var lastNameLength = nameLists[2].length -1
     for (i=0;i<5;i++){
-
+        if (surprise==true){
+            index=getRandomInt(2);
+        }
         // Generate 5 character names
         row = document.createElement("tr");
         cell = document.createElement("td");
         cell.classList.add("nameCells");
+        var firstNameLength = nameLists[index].length - 1
         var firstName = nameLists[index][getRandomInt(firstNameLength)]
         var lastName = nameLists[2][getRandomInt(lastNameLength)]
         var newName = firstName + " " + lastName;
         names.push(newName)
         var text = document.createTextNode(newName);
         cell.appendChild(text);
+        cell.setAttribute("id","name_"+i.toString());
         row.appendChild(cell);
         nameTable.appendChild(row);
 
         // Generate 5 pictures of characters
         if (index==0){
-            pictureStart = 1
+            pictureStart = 1;
+            maxPicNum = 1799;
         } else {
-            pictureStart = 3000
+            pictureStart = 1801;
+            maxPicNum = 8087;
         }
         var pictureCell = document.getElementById("picture_"+i.toString());
         pictureCell.innerHTML = "";
         var picture = document.createElement("img");
         picture.setAttribute("id","img_"+i.toString());
-        var picName = pictureStart + getRandomInt(999)+1;
+        var picName = pictureStart + getRandomInt(maxPicNum)+1;
         console.log(picName);
         var picLink = "./images/"+picName.toString()+".jpg";
         picture.src = picLink;
+        picture.style.borderRadius = '4px';
         pictureCell.appendChild(picture);
         
     }
@@ -93,7 +100,14 @@ function enlargeImg(imgnum){
     overImage.src = clickedPic.src;
     overImage.onclick =function(){hideOverlay()};
     overImage.setAttribute('id','overImage');
+    overImage.style.borderRadius = '10px';
     overImgDiv.appendChild(overImage);
+    var nameText = document.getElementById("name_"+imgnum.toString());
+    var imgName = document.createTextNode(nameText.textContent);
+    var imgNameP = document.createElement("h2");
+    imgNameP.classList.add("imgName");
+    imgNameP.appendChild(imgName);
+    overImgDiv.appendChild(imgNameP);
     overlay.style.visibility = "visible";
 }
 
@@ -113,7 +127,7 @@ function getFemaleName(){
 }
 
 function getSurpriseName(){
-    names = generateNames(getRandomInt(2))
+    names = generateNames(getRandomInt(2),true)
     return names
 }
 
