@@ -98,7 +98,7 @@ function enlargeImg(imgnum){
     var clickedPic = document.getElementById("img_"+imgnum.toString());
     var overImage = document.createElement("img");
     overImage.src = clickedPic.src;
-    overImage.onclick =function(){hideOverlay()};
+    overlay.onclick =function(){hideOverlay()};
     overImage.setAttribute('id','overImage');
     overImage.style.borderRadius = '10px';
     overImgDiv.appendChild(overImage);
