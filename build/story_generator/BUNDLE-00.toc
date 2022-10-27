@@ -1,0 +1,3 @@
+([('story_generator',
+   '/Users/brandon.arnold/Documents/GitHub/Name-Generator/dist/story_generator',
+   'EXECUTABLE')],)
