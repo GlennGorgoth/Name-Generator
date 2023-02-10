@@ -1,0 +1,288 @@
+/* Style for overall look, fonts, etc. */
+
+body {
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
+h1 {
+    text-transform: uppercase;
+    /* padding-left: 2px;
+    padding-right: 2px; */
+    padding: 5px;
+}
+h2 {
+    font-size:large;
+}
+
+h3 {
+    text-transform: uppercase;
+    color: #ccc;
+}
+
+table {
+    border-collapse: collapse;
+    /* width: 50%; */
+}
+
+
+.background{
+    background-color: #003570;
+    /* position: relative; */
+}
+
+
+
+
+/* Page Layout */
+
+.menuDiv {
+    position: absolute;
+    width: 100%;
+    z-index: 10;
+}
+
+.menuTitle{
+    background-color: #0082a6;
+    border-radius: 6px;
+    color:#fff568;
+    font-size: 100%;
+    max-width:max-content;
+    padding: 0px 10px;
+    margin: auto;
+    text-align: center;
+}
+
+.pictures{
+    max-width: 90%;
+}
+
+.footer{
+    position: relative;
+    text-align: center;
+    margin-top: 20px;
+}
+
+.overlay{
+    position: fixed;
+    display:block;
+    width: 100%;
+    justify-content: center;
+    align-content: center;
+    z-index: 100;
+    visibility: hidden;
+}
+
+#overBackground{
+    position: fixed;
+    display: block;
+    background-color: #001e40;
+    border-radius: 10px;
+    opacity: .85;
+    width: 98%;
+    height: 100%;
+    visibility: inherit;
+}
+
+#overImgDiv{
+    text-align: center;
+}
+
+#overImage{
+    position: relative;
+    display:block;
+    width: 70%;
+    max-width: 300px;
+    margin: auto;
+    margin-top: 20px;
+}
+
+.imgName{
+    position: relative;
+    display: block;
+    font-size: x-large;
+    color: #a8ce6f;
+    margin-top: 10px;
+}
+
+/* Layout for Buttons */
+
+.container {
+    width: auto;
+    /* padding: 5px; */
+    margin: auto;
+    text-align: center;
+    align-items: center;
+}
+
+button {
+    background-color: #0082a6;
+    /* color:#0082a6; */
+    color: #a8ce6f;
+    border-radius: 6px;
+    cursor: pointer;
+}
+
+.menuButton {
+    background-color: #002044;
+    color: #a8ce6f;
+    border-radius: 4px;
+    cursor: pointer;
+    padding: 4px 10px;
+    margin-left: auto;
+    text-transform: uppercase;
+}
+
+.loginButton {
+    text-transform: uppercase;
+    color: #ccc;
+    font-size: large;
+    padding: 10px 15px;
+    margin: 15px 20px;
+    border: none;
+    width:fit-content;
+}
+
+button:hover {
+    opacity: 0.8;
+}
+
+
+
+/* Layout for Name Results Table */
+
+#storyText{
+    background-color: #002651;
+    color:#fff568;
+    /* font-size: 200%; */
+    width: fit-content;
+    /* padding: 10px; */
+    padding-top: 2px;
+    margin: 20px auto;
+    text-align: center;
+    align-items: center; 
+}
+
+.storyResults {
+    /* position: absolute; */
+    /* border: 2px solid #6c93ff; */
+    /* background-color: #0082a6; */
+    text-align: center;
+    margin: 15px;
+    padding: 5px 25px;
+    font-size:large;
+    font-weight:lighter;
+}
+.pictures{
+    margin:auto;
+    align-items: center;
+}
+
+td img {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    max-width: 95%;
+    height: auto;
+}
+
+/* Colors */
+
+.tile-font{
+    color: #003570;
+}
+
+.button{
+    color: #0082a6;
+}
+
+.text-green{
+    color: #add373;
+}
+
+.text-yellow{
+    color: #fff568;
+}
+
+.orange-outline{
+    background-color: #f68e56;
+}
+
+.blue-outline{
+    background-color: #004659;
+}
+
+.grid-highlight{
+    background-color: #001e40;
+}
+
+.graybox {
+    background-color: #ccc;
+}
+
+.whitebox {
+    background-color: #fff;
+}
+
+.checkedbox {
+    background-color: #545454;
+    color:#aaa;
+}
+
+.wrongBox {
+    color: red;
+    /* font-size: 300px; */
+}
+
+.redfont {
+    color: red;
+}
+
+.bluefont {
+    color: blue;
+}
+
+.yellowfont {
+    color: yellow;
+}
+
+.blackfont {
+    color: black;
+}
+
+.grayfont {
+    color: gray;
+}
+
+.color1{
+    filter: brightness(0.5) sepia(1) saturate(500%);
+}
+
+.color2{
+    filter: brightness(0.5) sepia(1) hue-rotate(180deg) saturate(500%) ;
+}
+
+.color3 {
+    filter: brightness(0.5) sepia(1) hue-rotate(230deg) saturate(500%) ;
+}
+
+.color4 {
+    filter: brightness(0.5) sepia(1) hue-rotate(30deg) saturate(500%) ;
+}
+
+.color5 {
+    filter: brightness(.7) sepia(1) hue-rotate(60deg) saturate(500%) ;
+}
+
+.color6 {
+    filter: brightness(0.7) sepia(1) hue-rotate(290deg) saturate(500%) ;
+}
+
+.color7 {
+    filter: brightness(0.5) sepia(1) hue-rotate(90deg) saturate(500%) ;
+}
+
+.color8 {
+    filter: brightness(0.5) sepia(1) hue-rotate(320deg) saturate(500%) ;
+}
+
+

@@ -1,0 +1,464 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="author" content="Brandon Arnold">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="description" content="Name Generator">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-csv/1.0.21/jquery.csv.min.js" integrity="sha512-Y8iWYJDo6HiTo5xtml1g4QqHtl/PO1w+dmUpQfQSOTqKNsMhExfyPN2ncNAe9JuJUSKzwK/b6oaNPop4MXzkwg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+        <script>
+            const nameCsvFiles = [
+                "https://paradicecity.com/name-generator/files/femaleFirstNames.csv",
+                "https://paradicecity.com/name-generator/files/maleFirstNames.csv",
+                "https://paradicecity.com/name-generator/files/lastNames.csv"
+            ]
+            function getRandomInt(max){
+                return Math.floor(Math.random() * max);
+            }
+            var nameLists = new Array();
+
+            function importNameLists() {
+                var nameFile
+                console.log("importing name lists")
+                for (a = 0; a < 3; a++){
+                    // console.log("indx = " + a);
+                    nameFile = nameCsvFiles[a];
+                    // console.log('retrieving ' + nameFile)
+                    $.ajax({
+                        type: "GET",
+                        url: nameFile,
+                        dataType: "text",
+                        success: function(data) {
+                        //   console.log(data)
+                        //   nameLists.push(data)
+                        const names = $.csv.toArrays(data); //define your own function
+                        nameLists.push(names)
+                        checkIfFinished();
+                        }
+                    });
+                }
+            }
+
+            function checkIfFinished(){
+                if (nameLists.length == 3) {
+                    for (i=0; i<3; i++){
+                        console.log("added " + nameLists[i][0])
+                    }
+                }
+            }
+
+            function generateNames(index, surprise=false) {
+                document.getElementById("nameText").innerHTML = "";
+                nameTable = document.getElementById("nameText");
+                nameTable.hidden = false;
+                var names = new Array();
+                var pictureStart = 1;
+                var maxPicNum = 1799;
+                var lastNameLength = nameLists[2].length -1
+                for (i=0;i<5;i++){
+                    if (surprise==true){
+                        index=getRandomInt(2);
+                    }
+                    // Generate 5 character names
+                    row = document.createElement("tr");
+                    cell = document.createElement("td");
+                    cell.classList.add("nameCells");
+                    var firstNameLength = nameLists[index].length - 1
+                    var firstName = nameLists[index][getRandomInt(firstNameLength)]
+                    var lastName = nameLists[2][getRandomInt(lastNameLength)]
+                    var newName = firstName + " " + lastName;
+                    names.push(newName)
+                    var text = document.createTextNode(newName);
+                    cell.appendChild(text);
+                    cell.setAttribute("id","name_"+i.toString());
+                    row.appendChild(cell);
+                    nameTable.appendChild(row);
+
+                    // Generate 5 pictures of characters
+                    if (index==0){
+                        pictureStart = 1;
+                        maxPicNum = 1799;
+                    } else {
+                        pictureStart = 1801;
+                        maxPicNum = 8087;
+                    }
+                    var pictureCell = document.getElementById("picture_"+i.toString());
+                    pictureCell.innerHTML = "";
+                    var picture = document.createElement("img");
+                    picture.setAttribute("id","img_"+i.toString());
+                    var picName = pictureStart + getRandomInt(maxPicNum)+1;
+                    console.log(picName);
+                    var picLink = "https://paradicecity.com/name-generator/images/"+picName.toString()+".jpg";
+                    picture.src = picLink;
+                    picture.style.borderRadius = '4px';
+                    pictureCell.appendChild(picture);
+                    
+                }
+            }
+
+            function enlargeImg(imgnum){
+                var overlay = document.getElementById("overlay");
+                var overImgDiv = document.getElementById("overImgDiv");
+                overImgDiv.innerHTML="";
+                var clickedPic = document.getElementById("img_"+imgnum.toString());
+                var overImage = document.createElement("img");
+                overImage.src = clickedPic.src;
+                overlay.onclick =function(){hideOverlay()};
+                overImage.setAttribute('id','overImage');
+                overImage.style.borderRadius = '10px';
+                overImgDiv.appendChild(overImage);
+                var nameText = document.getElementById("name_"+imgnum.toString());
+                var imgName = document.createTextNode(nameText.textContent);
+                var imgNameP = document.createElement("h2");
+                imgNameP.classList.add("imgName");
+                imgNameP.appendChild(imgName);
+                overImgDiv.appendChild(imgNameP);
+                overlay.style.visibility = "visible";
+            }
+
+            function hideOverlay(){
+                var overlay = document.getElementById("overlay");
+                overlay.style.visibility = "hidden";
+            }
+
+            function getMaleName(){
+                names = generateNames(1)
+                return names
+            }
+
+            function getFemaleName(){
+                names = generateNames(0)
+                return names
+            }
+
+            function getSurpriseName(){
+                names = generateNames(getRandomInt(2),true)
+                return names
+            }
+
+            $(document).ready(function() {
+                importNameLists();
+            });
+            
+        </script>
+        <title>Character Name Generator</title>
+        <style>
+            body {
+                font-family: Verdana, Geneva, Tahoma, sans-serif;
+            }
+
+            h1 {
+                text-transform: uppercase;
+                /* padding-left: 2px;
+                padding-right: 2px; */
+                padding: 5px;
+            }
+            h2 {
+                font-size:large;
+            }
+
+            h3 {
+                text-transform: uppercase;
+                color: #ccc;
+            }
+
+            table {
+                border-collapse: collapse;
+                /* width: 50%; */
+            }
+
+
+            .background{
+                background-color: #003570;
+                /* position: relative; */
+            }
+
+
+
+
+            /* Page Layout */
+
+            .menuDiv {
+                position: absolute;
+                width: 100%;
+                z-index: 10;
+            }
+
+            .menuTitle{
+                background-color: #0082a6;
+                border-radius: 6px;
+                color:#fff568;
+                font-size: 100%;
+                max-width:max-content;
+                padding: 0px 10px;
+                margin: auto;
+                text-align: center;
+            }
+
+            .pictures{
+                max-width: 90%;
+            }
+
+            .footer{
+                position: relative;
+                text-align: center;
+                margin-top: 20px;
+            }
+
+            .overlay{
+                position: fixed;
+                display:block;
+                width: 100%;
+                justify-content: center;
+                align-content: center;
+                z-index: 100;
+                visibility: hidden;
+            }
+
+            #overBackground{
+                position: fixed;
+                display: block;
+                background-color: #001e40;
+                border-radius: 10px;
+                opacity: .85;
+                width: 98%;
+                height: 100%;
+                visibility: inherit;
+            }
+
+            #overImgDiv{
+                text-align: center;
+            }
+
+            #overImage{
+                position: relative;
+                display:block;
+                width: 70%;
+                max-width: 300px;
+                margin: auto;
+                margin-top: 20px;
+            }
+
+            .imgName{
+                position: relative;
+                display: block;
+                font-size: x-large;
+                color: #a8ce6f;
+                margin-top: 10px;
+            }
+
+            /* Layout for Buttons */
+
+            .container {
+                width: auto;
+                /* padding: 5px; */
+                margin: auto;
+                text-align: center;
+                align-items: center;
+            }
+
+            button {
+                background-color: #0082a6;
+                /* color:#0082a6; */
+                color: #a8ce6f;
+                border-radius: 6px;
+                cursor: pointer;
+            }
+
+            .menuButton {
+                background-color: #002044;
+                color: #a8ce6f;
+                border-radius: 4px;
+                cursor: pointer;
+                padding: 4px 10px;
+                margin-left: auto;
+                text-transform: uppercase;
+            }
+
+            .loginButton {
+                text-transform: uppercase;
+                color: #ccc;
+                font-size: large;
+                padding: 10px 15px;
+                margin: 15px 20px;
+                border: none;
+                width:fit-content;
+            }
+
+            button:hover {
+                opacity: 0.8;
+            }
+
+
+
+            /* Layout for Name Results Table */
+
+            #nameText{
+                background-color: #002651;
+                color:#fff568;
+                /* font-size: 200%; */
+                width: fit-content;
+                /* padding: 10px; */
+                padding-top: 2px;
+                margin: 20px auto;
+                text-align: center;
+                align-items: center; 
+            }
+
+            .nameCells {
+                /* position: absolute; */
+                /* border: 2px solid #6c93ff; */
+                /* background-color: #0082a6; */
+                text-align: center;
+                margin: 15px;
+                padding: 5px 25px;
+                font-size:large;
+                font-weight: bold;
+                
+            }
+            .pictures{
+                margin:auto;
+                align-items: center;
+            }
+
+            td img {
+                display: block;
+                margin-left: auto;
+                margin-right: auto;
+                max-width: 95%;
+                height: auto;
+            }
+
+            /* Colors */
+
+            .tile-font{
+                color: #003570;
+            }
+
+            .button{
+                color: #0082a6;
+            }
+
+            .text-green{
+                color: #add373;
+            }
+
+            .text-yellow{
+                color: #fff568;
+            }
+
+            .orange-outline{
+                background-color: #f68e56;
+            }
+
+            .blue-outline{
+                background-color: #004659;
+            }
+
+            .grid-highlight{
+                background-color: #001e40;
+            }
+
+            .graybox {
+                background-color: #ccc;
+            }
+
+            .whitebox {
+                background-color: #fff;
+            }
+
+            .checkedbox {
+                background-color: #545454;
+                color:#aaa;
+            }
+
+            .wrongBox {
+                color: red;
+                /* font-size: 300px; */
+            }
+
+            .redfont {
+                color: red;
+            }
+
+            .bluefont {
+                color: blue;
+            }
+
+            .yellowfont {
+                color: yellow;
+            }
+
+            .blackfont {
+                color: black;
+            }
+
+            .grayfont {
+                color: gray;
+            }
+
+            .color1{
+                filter: brightness(0.5) sepia(1) saturate(500%);
+            }
+
+            .color2{
+                filter: brightness(0.5) sepia(1) hue-rotate(180deg) saturate(500%) ;
+            }
+
+            .color3 {
+                filter: brightness(0.5) sepia(1) hue-rotate(230deg) saturate(500%) ;
+            }
+
+            .color4 {
+                filter: brightness(0.5) sepia(1) hue-rotate(30deg) saturate(500%) ;
+            }
+
+            .color5 {
+                filter: brightness(.7) sepia(1) hue-rotate(60deg) saturate(500%) ;
+            }
+
+            .color6 {
+                filter: brightness(0.7) sepia(1) hue-rotate(290deg) saturate(500%) ;
+            }
+
+            .color7 {
+                filter: brightness(0.5) sepia(1) hue-rotate(90deg) saturate(500%) ;
+            }
+
+            .color8 {
+                filter: brightness(0.5) sepia(1) hue-rotate(320deg) saturate(500%) ;
+            }
+        </style> 
+    </head>
+    <body class="background">
+        <div class="menuDiv">
+            <div class="menuTitle"><h1>CLASSY NAME GENERATOR</h1> </div>
+            <div class="container">
+                <h2 class="text-green"><b>Click to generate some classy names</b></h2>
+                <button type="button" class="loginButton" onclick="getMaleName()">Male Names</button>
+                <button type="button" class="loginButton" onclick="getFemaleName()">Female Names</button>
+                <button type="button" class="loginButton" onclick="getSurpriseName()">Surprise Me</button>
+            </div>
+            <div class="nameResults" >
+
+                <table class="nameTable" id="nameText" hidden="true"></table>
+                <table class="pictures">
+                    <td class ="picture_cells" id="picture_0" onclick="enlargeImg(0)"></td>
+                    <td class ="picture_cells" id="picture_1" onclick="enlargeImg(1)" ></td>
+                    <td class ="picture_cells" id="picture_2" onclick="enlargeImg(2)"></td>
+                    <td class ="picture_cells" id="picture_3" onclick="enlargeImg(3)"></td>
+                    <td class ="picture_cells" id="picture_4" onclick="enlargeImg(4)" ></td>
+                </table>
+            </div>
+            <div class="footer">
+                <a class="menuButton" href="https://www.paradicecity.com/">Main</a>
+                <a class="menuButton" href="https://www.paradicecity.com/mint/">Mint</a>
+            </div>
+        </div>
+        <div class="overlay" id="overlay" visibility="hidden">
+            <div id="overBackground"></div>
+            <div id="overImgDiv"></div>
+        </div>
+    </body>
+</html>
